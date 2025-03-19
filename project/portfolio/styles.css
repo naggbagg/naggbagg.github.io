@@ -255,17 +255,16 @@ section {
 }
 
 .project-description {
+    margin: 1rem 0;
     color: var(--text-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
     line-height: 1.6;
 }
 
 .project-tech {
+    margin: 1.5rem 0;
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
 }
 
 .tech-tag {
@@ -277,10 +276,18 @@ section {
     font-weight: 500;
 }
 
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
 .project-link {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;
@@ -288,9 +295,28 @@ section {
     transition: var(--transition);
 }
 
-.project-link:hover {
+.github-link {
+    background-color: #24292e;
+    color: white;
+}
+
+.github-link:hover {
+    background-color: #2f363d;
+    transform: translateY(-2px);
+}
+
+.view-link {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.view-link:hover {
     background-color: var(--accent-color);
     transform: translateY(-2px);
+}
+
+.project-link i {
+    font-size: 1.1rem;
 }
 
 /* Contact Section */
