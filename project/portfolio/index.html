@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naomi Jones - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">NJ</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <div class="profile-image">
+                        <!-- Add your image here -->
+                        <img src="images/profile.jpg" alt="Naomi Jones" class="profile-pic">
+                    </div>
+                    <div class="profile-text">
+                        <h1>Naomi Jones</h1>
+                        <p>Hi, my name is Naomi Jones. I am currently pursuing a degree in Information Systems with an emphasis in web development at Utah State University. I will be graduating spring 2026. My appreciation for development started during a highschool introductory python class, and has since blossomed into my career choice. I am excited to learn and grow my knowledge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="experience">
+            <h1>Skills & Experience</h1>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                    <p>Proficient in Python programming with experience in data analysis and automation.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>SQL</h3>
+                    <p>Strong understanding of SQL for database management and querying.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-aws"></i>
+                    <h3>AWS</h3>
+                    <p>Knowledge of AWS services and cloud computing principles.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML</h3>
+                    <p>Expert in creating semantic and accessible HTML structures.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS</h3>
+                    <p>Skilled in modern CSS techniques and responsive design.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-git-alt"></i>
+                    <h3>Git</h3>
+                    <p>Experience with version control and collaborative development.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <h1>My Projects</h1>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="images/javajam-preview.jpg" alt="JavaJam Coffee Bar Website" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">JavaJam Coffee Bar</h3>
+                        <p class="project-description">A responsive website for a fictional coffee bar featuring a modern design, menu listings, music events, and job postings. The site showcases my ability to create engaging, user-friendly web experiences.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">Responsive Design</span>
+                        </div>
+                        <a href="../../javajam/index.html" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card coming-soon">
+                    <div class="project-content">
+                        <h3 class="project-title">More Coming Soon</h3>
+                        <p class="project-description">I'm currently working on exciting new projects. Check back soon to see what I'm building!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h1>Get in Touch</h1>
+            <div class="contact-container">
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/naomigjones/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                        <span>Connect on LinkedIn</span>
+                    </a>
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Naomi Jones. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
