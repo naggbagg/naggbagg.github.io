@@ -1,0 +1,49 @@
+
+<!--
+By Naomi Jones
+This code adjusts the Huntsman School Purpose and pulls text from it.
+Huntsman School Purpose:
+
+"Utah State University is the land-grant institution in the State of Utah. The purpose of the Jon M. Huntsman School of Business is to be an engine of growth for our community, the state, the nation, and the world, and to be a career accelerator for our students."
+Create a new HTML file.
+Insert the starter HTML.
+Insert JavaScript
+Create a variable that contains the text of the Huntsman School Purpose
+Find the position of the text "land-grant"
+Using the position of the text "land-grant" to alert the text "land-grant institution"
+Grab "our students" and print it out using one of the string methods we discussed.
+Replace the text "our students" with your name and replace the text "land-grant" with "land-grant and space-grant"
+Alert the adjusted Huntsman School Purpose
+Comment your name and a program description at the top of the file
+Use clean comments throughout your code.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // base text
+        let huntsmanPurpose = "Utah State University is the land-grant institution in the State of Utah. The purpose of the Jon M. Huntsman School of Business is to be an engine of growth for our community, the state, the nation, and the world, and to be a career accelerator for our students."
+
+        // find position of land-grant
+        let landGrantPos = huntsmanPurpose.search("land-grant");
+        // pull out land-grant institution using position
+        alert(huntsmanPurpose.substr(landGrantPos,23));
+        //find position of our students
+        let ourStudentsPos = huntsmanPurpose.search("our students");
+        //pull out our students using position
+        alert(huntsmanPurpose.substr(ourStudentsPos,12));
+        // pull out our students using substring
+        alert(huntsmanPurpose.substring(249,261));
+        // replace our students with Naomi Jones and land-grant with land-grant and space-grant
+        let adjustedHuntsmanPurpose = huntsmanPurpose.replace("our students","Naomi Jones").replace("land-grant","land-grant and space-grant");
+        // show adjusted text
+        alert(adjustedHuntsmanPurpose);
+
+    </script>
+</body>
+</html>
