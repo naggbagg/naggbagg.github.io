@@ -1,0 +1,50 @@
+<!--   
+Name: Naomi Jones
+Description: This does some small math
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        #problem 1
+        # Recieve an input for a number then
+        # Multiply that number by 2 then 
+        # Add 9 then 
+        # Divide by 2 then
+        #subtract the origonal number then
+        #print the result
+        */
+
+        let myNum = parseFloat(prompt("Please enter a number "))
+        let runningNumber = myNum * 2;
+        runningNumber = runningNumber + 9;
+        runningNumber = runningNumber - 3;
+        runningNumber = runningNumber / 2;
+        runningNumber = runningNumber - myNum;
+        alert(runningNumber);
+
+        /*
+        # Problem 2
+        # rewrite the last problem using compound assignment
+        */
+        
+        let num2 = parseFloat(prompt("Please enter a number "));
+        let runningNumber2 = myNum * 2;
+        runningNumber2 += 9;
+        runningNumber2 -= 3;
+        runningNumber2 /= 2;
+        runningNumber2 -= num2
+        alert(runningNumber2);
+
+
+
+    </script>
+</body>
+</html>
