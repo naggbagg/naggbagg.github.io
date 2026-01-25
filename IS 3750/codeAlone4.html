@@ -1,0 +1,90 @@
+<!-- 
+Name: Naomi Jones
+Description: Professor Appointment Scheduler 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1>Professor Appointment Scheduler</h1>
+<body>
+    <script>
+        // Ask for role
+    let role = prompt("Enter your role:");
+// if you arent a student no bueno 
+if (role !== "student") {
+    alert("Only students can schedule appointments.");
+} else {
+
+    // Ask for subject
+    let subject = prompt(
+        "Select a subject:\n" +
+        "1 - Radiation Studies\n" +
+        "2 - Advanced Robotics\n" +
+        "3 - Philosophy\n" +
+        "4 - Amazonian History\n" +
+        "5 - Photography & Web Design"
+    );
+
+    let hour = "";
+    // if + else statement for bruce banner
+    if (subject === "1") {
+        alert("Professor: Bruce Banner\nAvailable hours: 1 PM or 2 PM");
+        hour = prompt("Enter preferred appointment hour (1 or 2):");
+
+        if (hour === "1" || hour === "2") {
+            alert("Appointment confirmed!\nProfessor: Bruce Banner\nTime: " + hour + " PM");
+        } else {
+            alert("Bruce Banner is unavailable at that time.");
+        }
+        // if + else statement for tony stark
+    } else if (subject === "2") {
+        alert("Professor: Tony Stark\nAvailable hours: 2 PM or 4 PM");
+        hour = prompt("Enter preferred appointment hour (2 or 4):");
+
+        if (hour === "2" || hour === "4") {
+            alert("Appointment confirmed!\nProfessor: Tony Stark\nTime: " + hour + " PM");
+        } else {
+            alert("Tony Stark is unavailable at that time.");
+        }
+        // if + else statement for Yoda
+    } else if (subject === "3") {
+        alert("Professor: Yoda\nAvailable hours: 1 PM or 5 PM");
+        hour = prompt("Enter preferred appointment hour (1 or 5):");
+
+        if (hour === "1" || hour === "5") {
+            alert("Appointment confirmed!\nProfessor: Yoda\nTime: " + hour + " PM");
+        } else {
+            alert("Yoda is unavailable at that time.");
+        }
+        // if + else statement for Diana Prince
+    } else if (subject === "4") {
+        alert("Professor: Diana Prince\nAvailable hours: 3 PM or 4 PM");
+        hour = prompt("Enter preferred appointment hour (3 or 4):");
+
+        if (hour === "3" || hour === "4") {
+            alert("Appointment confirmed!\nProfessor: Diana Prince\nTime: " + hour + " PM");
+        } else {
+            alert("Diana Prince is unavailable at that time.");
+        }
+        // if + else statement for peter parker
+    } else if (subject === "5") {
+        alert("Professor: Peter Parker\nAvailable hours: 2 PM or 5 PM");
+        hour = prompt("Enter preferred appointment hour (2 or 5):");
+
+        if (hour === "2" || hour === "5") {
+            alert("Appointment confirmed!\nProfessor: Peter Parker\nTime: " + hour + " PM");
+        } else {
+            alert("Peter Parker is unavailable at that time.");
+        }
+        // else catchall
+    } else {
+        alert("Invalid subject selection.");
+    }
+}
+    </script>
+</body>
+</html>
