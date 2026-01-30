@@ -1,0 +1,73 @@
+<!-- 
+Name: Naomi Jones
+Description: Number guess game where computer uses algorithm to guess numbers from user
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number Guesser</title>
+</head>
+
+<body>
+    <script>
+
+            // Variables needed for the program. Init
+        let maxNum = 0;
+        let minNum = 0;
+        let computerGuess = 0;
+        let userResponse = "";
+        let numGuesses = 0;
+        let distance = 0;
+        alert("The game is starting")
+            // Write a program in JavaScript where the computer tries to guess a number
+            // that the user has in their head. Follow the steps below to complete the assignment:
+
+            // 1) Welcome the user to the game with a message.
+        alert("Welcome to the game where I (the computer) will guess the number you are thinking of. I will first need a range")
+
+            // 2) Ask the user to provide the maximum number in the range.
+        maxNum = parseInt(prompt("What is the maximum number in your range"))
+
+            // 3) Ask the user to provide the minimum number in the range.
+        minNum = parseInt(prompt("What is the minimum number in your range"))
+
+            // 4) Display an alert to let the user know the game is starting.
+        alert("The game is starting beep boop beep")
+
+            // 5) Have the computer guess the middle number in the current range.
+            // keep guessing until the computer gets it right
+        do {
+
+            // calculating the mid guess
+            distance = maxNum-minNum
+            guess = (distance/2)+minNum;
+            guess = Number(guess.toFixed(0))
+            // 6) Prompt the user to see if the guess is correct. The user should respond with:
+            userResponse = prompt(`The computer guessed the number ${guess} Is that correct? Enter c for correct, h for too high, and l for too low`).toLowerCase();
+            //Increment guesses:
+            numGuesses++;
+
+
+            
+            // 7) Based on the user’s response, adjust the range accordingly:
+            if(userResponse === "h"){
+                maxNum = guess;
+            }else if(userResponse === "l"){
+                minNum = guess;
+            }else if(userResponse === "c"){
+                minNum = guess;
+                maxNum = guess;
+            }else{
+                alert("Not a valid response")
+            }
+        }while(userResponse!="c")
+
+        // 9) Once the computer guesses the number, display the number of attempts it took.
+        alert(`Hooray! The computer geuss it! It only took ${numGuesses} tries`)
+
+    
+    </script>
+</body>
+</html>

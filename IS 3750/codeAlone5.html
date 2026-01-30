@@ -1,0 +1,96 @@
+<!--  
+Name: Naomi Jones
+Description: generate random numbers, ask the user to guess if they are prime or not, and keep score. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let playAgain = "yes";
+    let correctGuesses = 0;
+    let totalRounds = 0;
+
+    while (playAgain ==="yes"){
+
+        //Generate random num between 1 and 100
+        let number = Math.floor(Math.random()* 100) + 1;
+
+        //Asl user for their guess
+        let guess = prompt("The number is: " + number + ". Do you think it is PRIME or NOT PRIME");
+
+        //Normalize input
+        guess = guess.toLowerCase();
+
+        let factors = "";
+        let factorCount = 0;
+
+        //Check for factors
+        for (let i = 1; i <= number; i++) {
+            if (number % i === 0) {
+                factors = factors + i + ", ";
+                factorCount = factorCount + 1;
+            }
+        }
+
+        //Remove last comma and space
+        factors = factors.substring(0, factors.length - 2);
+
+        //Determine if prime
+        let isPrime = false;
+        if (factorCount === 2) {
+            isPrime = true;
+        }
+
+        //Build result message
+        let resultMessage = "Factors: " + factors + " Total Factors: " + factorCount;
+
+        if (isPrime) {
+            resultMessage = resultMessage + " This number IS prime.";
+
+        }else{
+            resultMessage = resultMessage + " This number is NOT prime.";
+        }
+
+        //Check user guess
+        let userCorrect = false;
+
+        if (isPrime && guess === "prime"){
+            userCorrect = true;
+        }else if (!isPrime && guess === "not prime'"){
+            userCorrect = true;
+        }
+        if (userCorrect){
+            correctGuesses = correctGuesses +1;
+            resultMessage = resultMessage + "You were CORRECT!!";
+        }else{
+            resultMessage = resultMessage + "You were WRONG  booo. )"
+        }
+
+        //keeping track of rounds
+        totalRounds = totalRounds + 1;
+
+        alert(resultMessage);
+
+        //Ask user to play again
+        playAgain = prompt("DO you want to play again? (yes or no)");
+        playAgain = playAgain.toLowerCase();
+    }
+    //FInal Score
+    let percentage = (correctGuesses / totalRounds) * 100;
+
+alert(
+    "Final Score\n" +
+    "Correct Guesses: " + correctGuesses +
+    "\nTotal Rounds: " + totalRounds +
+    "\nPercentage: " + percentage.toFixed(2) + "%"
+);
+
+    </script>
+</body>
+</html>
