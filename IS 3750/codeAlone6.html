@@ -1,0 +1,96 @@
+<!--
+Name:Naomi Jones
+Description: Collect info about students holding positions in a student organization and display results
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>USU Student Organization Tracker</title>
+</head>
+<body>
+
+<script>
+
+//1. Create arrays to store student information
+
+// Arrays to store student data
+let firstNames = [];
+let lastNames = [];
+let usuIDs = [];
+let positionNames = [];
+let positionStatuses = [];
+
+// Array to store position status options
+let statusOptions = [
+    "Nominated",
+    "Elected",
+    "Active",
+    "Recorded on Website"
+];
+
+
+//2. Ask the user for the organization name
+
+
+let organizationName = prompt("Enter the name of the student organization:");
+
+//3. Ask how many students hold positions
+
+
+let numberOfStudents = parseInt(
+    prompt("How many students hold positions in " + organizationName + "?")
+);
+
+
+//4. Gather information for each student Use a loop that runs once for each student
+
+
+for (let i = 0; i < numberOfStudents; i++) {
+
+    // Ask for basic student information
+    firstNames[i] = prompt("Enter FIRST name of student #" + (i + 1) + ":");
+    lastNames[i] = prompt("Enter LAST name of student #" + (i + 1) + ":");
+    usuIDs[i] = prompt("Enter USU ID (A#) of student #" + (i + 1) + ":");
+    positionNames[i] = prompt("Enter POSITION NAME of student #" + (i + 1) + ":");
+
+    // Display status options for the user to choose from
+    let statusMessage = "Select a position status by number:\n";
+
+    // Loop through the status options and list them
+    for (let j = 0; j < statusOptions.length; j++) {
+        statusMessage += j + ": " + statusOptions[j] + "\n";
+    }
+
+    // Ask the user to choose a status
+    let statusChoice = parseInt(prompt(statusMessage));
+
+    // Store the selected status in the array
+    positionStatuses[i] = statusOptions[statusChoice];
+
+    // Show confirmation after each student is added
+    alert("Student #" + (i + 1) + " added successfully!");
+}
+
+//5. Display the results
+
+
+// Create a string to hold all results
+let output = "Organization: " + organizationName + "\n\n";
+
+// Loop through each student and add their information
+for (let i = 0; i < numberOfStudents; i++) {
+
+    output +=
+        "A#: " + usuIDs[i] + "\n" +
+        "Name: " + firstNames[i] + " " + lastNames[i] + "\n" +
+        "Position Name: " + positionNames[i] + "\n" +
+        "Position Status: " + positionStatuses[i] + "\n\n";
+}
+
+// Display the final results
+alert(output);
+
+</script>
+
+</body>
+</html>
