@@ -1,0 +1,30 @@
+<!-- 
+Name: Naomi Jones
+Description: Mini Calc with lots of functions
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type = "module">
+        // bring in all the functions
+        import {add,subtract,multiply,divide,modulus,power,calculate} from "naggbagg.github.io/IS 3750/FunctionProject.js"
+        const myFunctionsList = [add,subtract,multiply,divide,modulus,power];
+        
+        // call the calculate function once for each of the
+        // functions that you previously defined
+    
+        // Alert the results of each calculation
+        for(let func of myFunctionList){
+            alert(calculate(3,4,func));
+        }
+    </script>
+</body>
+
+</html>
