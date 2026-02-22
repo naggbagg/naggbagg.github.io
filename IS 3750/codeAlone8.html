@@ -1,0 +1,207 @@
+<!-- 
+    Name: Naomi Jones
+    Description: program to track organizations and the members holding positions in those organizations.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Member Tracker</title>
+</head>
+<body>
+    <h1>Organization Member Tracker</h1>
+    <p>Open the console (F12) to see the output.</p>
+    
+    <script>
+        
+        // STEP 1: SET UP DATA STRUCTURES
+        
+        // Create an empty array to store all organizations
+        let organizations = [];
+        
+        // Create an array with the 4 status options
+        let statusOptions = ["Nominated", "Elected", "Active", "Recorded on Website"];
+
+        // STEP 2: ADD ORGANIZATIONS
+        
+        // Ask the user if they want to add an organization
+        let addOrg = prompt("Would you like to add an organization? (Y/N)");
+        
+        // Keep asking while user enters 'y' or 'Y'
+        while (addOrg && addOrg.toLowerCase()[0] === 'y') {
+            // Get the organization name from user
+            let orgName = prompt("Enter the organization name:");
+            
+            // Create a new organization object and add it to the array
+            organizations.push({ name: orgName, members: [] });
+            
+            // Print success message
+            console.log("Organization '" + orgName + "' added successfully!");
+            
+            // Ask if user wants to add another organization
+            addOrg = prompt("Would you like to add another organization? (Y/N)");
+        }
+
+        // STEP 3: ADD MEMBERS TO EACH ORGANIZATION
+        
+        // Loop through each organization using a basic for loop
+        for (let i = 0; i < organizations.length; i++) {
+            let org = organizations[i];
+            
+            // Ask how many members are in this organization
+            let memberCount = parseInt(prompt("How many members are in " + org.name + "?"));
+            
+            // Loop to collect each member's information
+            for (let j = 0; j < memberCount; j++) {
+                // Get member information
+                let firstName = prompt("Member " + (j + 1) + " - First Name:");
+                let lastName = prompt("Member " + (j + 1) + " - Last Name:");
+                let usuId = prompt("Member " + (j + 1) + " - USU ID (e.g., A1234):");
+                let positionName = prompt("Member " + (j + 1) + " - Position Name:");
+                
+                // Build a string showing all status options
+                let statusPrompt = "Member " + (j + 1) + " - Position Status:\n";
+                
+                // Loop through status options and add to prompt
+                for (let k = 0; k < statusOptions.length; k++) {
+                    statusPrompt += (k + 1) + ". " + statusOptions[k] + "\n";
+                }
+                
+                statusPrompt += "Enter number (1-4):";
+                
+                // Get user's choice
+                let statusChoice = parseInt(prompt(statusPrompt));
+                
+                // Get the actual status string (subtract 1 because arrays start at 0)
+                let positionStatus = statusOptions[statusChoice - 1];
+
+                // Create a member object and add it to the organization's members array
+                org.members.push({
+                    firstName: firstName,
+                    lastName: lastName,
+                    usuId: usuId,
+                    positionName: positionName,
+                    positionStatus: positionStatus,
+                    orgName: org.name
+                });
+            }
+        }
+
+        // STEP 4: DISPLAY ALL ORGANIZATIONS
+        
+        console.log("\n=== ALL ORGANIZATIONS ===\n");
+        
+        // Loop through each organization
+        for (let i = 0; i < organizations.length; i++) {
+            let org = organizations[i];
+            
+            // Print organization name
+            console.log("---" + org.name + "---");
+            
+            // Loop through each member in this organization
+            for (let j = 0; j < org.members.length; j++) {
+                let member = org.members[j];
+                
+                // Print member info
+                console.log("[" + member.usuId + "] - " + member.lastName + ", " + member.firstName + " has the position of " + member.positionName + " and the status is: " + member.positionStatus);
+            }
+            
+            // Print blank line
+            console.log("");
+        }
+
+        // STEP 5: ONBOARDING CHECKLIST (FILTER + MAP)
+        
+        // Gather all members from all organizations into one array
+        let allMembers = [];
+        for (let i = 0; i < organizations.length; i++) {
+            for (let j = 0; j < organizations[i].members.length; j++) {
+                allMembers.push(organizations[i].members[j]);
+            }
+        }
+
+        // Use filter to create a new array with only members who have "Nominated" status
+        let nominatedMembers = allMembers.filter(function(member) {
+            return member.positionStatus === "Nominated";
+        });
+        
+        // Use map to create an array of formatted strings for the onboarding checklist
+        let onboardingChecklist = nominatedMembers.map(function(member) {
+            return member.firstName + " " + member.lastName + " - " + member.positionName + " (" + member.orgName + ")";
+        });
+
+        // Display the onboarding checklist
+        console.log("\n=== ONBOARDING CHECKLIST ===");
+        console.log("Members needing follow-up:");
+        for (let i = 0; i < onboardingChecklist.length; i++) {
+            console.log(onboardingChecklist[i]);
+        }
+
+        // STEP 6: COUNT MEMBERS PER POSITION (REDUCE)
+        
+        // Use reduce to create an object to count how many members have each position
+        let positionCounts = allMembers.reduce(function(counts, member) {
+            let position = member.positionName;
+            
+            // If this position already exists in the count, add 1
+            if (counts[position]) {
+                counts[position] = counts[position] + 1;
+            } else {
+                // If this is a new position, start counting at 1
+                counts[position] = 1;
+            }
+            
+            // Return the counts object
+            return counts;
+        }, {});
+
+        // Display the position count report
+        console.log("\n=== POSITION COUNT REPORT ===");
+        for (let position in positionCounts) {
+            console.log(position + ": " + positionCounts[position]);
+        }
+
+        // STEP 7: SORT MEMBERS BY USU ID
+        
+        // Ask user which organization to sort
+        let orgToSort = prompt("Enter the name of the organization to sort by USU ID:");
+        
+        // Use find to search for the organization
+        let foundOrg = organizations.find(function(org) {
+            return org.name === orgToSort;
+        });
+
+        // If we found the organization
+        if (foundOrg) {
+            // Create a copy of the members array
+            let sortedMembers = [];
+            for (let i = 0; i < foundOrg.members.length; i++) {
+                sortedMembers.push(foundOrg.members[i]);
+            }
+            
+            // Use sort to sort the copy by USU ID numbers
+            sortedMembers.sort(function(a, b) {
+                // Get the number part of the USU ID (remove the "A")
+                let numA = parseInt(a.usuId.slice(1));
+                let numB = parseInt(b.usuId.slice(1));
+                
+                // Return the difference to sort in order
+                return numA - numB;
+            });
+
+            // Display sorted members
+            console.log("\n=== SORTED MEMBERS OF " + foundOrg.name + " ===");
+            for (let i = 0; i < sortedMembers.length; i++) {
+                let member = sortedMembers[i];
+                console.log("[" + member.usuId + "] - " + member.lastName + ", " + member.firstName + " has the position of " + member.positionName + " and the status is: " + member.positionStatus);
+            }
+        } else {
+            console.log("Organization not found.");
+        }
+
+        console.log("\n=== Program Complete ===");
+    </script>
+</body>
+</html>

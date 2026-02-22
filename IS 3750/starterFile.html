@@ -1,0 +1,110 @@
+<!-- 
+    Name: Naomi Jones
+    Description: Manage pizza shop using arrays and objects
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Create an array of pizzas the shop sells.
+        //    Each pizza should be an object with keys: name, price, isVegetarian.
+        //    Add at least 3 pizzas of your choice.
+        //    Print the array.
+        //
+        //    If you can't think of pizza names, you can use these:
+        //    - Cheese Pizza – $8.99 – Vegetarian
+        //    - Pepperoni – $10.99 – Not vegetarian
+        //    - BBQ Chicken – $11.99 – Not vegetarian
+        //    - Veggie Supreme – $9.99 – Vegetarian
+        //    - Mushroom Delight – $9.49 – Vegetarian
+        //    - Hawaiian – $10.49 – Not vegetarian
+
+        //    - Step 3: Calzone – $7.99 – Not vegetarian
+        
+
+    let pizzaShopPizzas = [
+        {name:"Cheese Pizza",price:8.99,isVegetarian:true},
+        {name:"Veggie Supreme",price:9.99,isVegetarian:true},
+        {name:"BBQ CHicken",price:11.99,isVegetarian:false},
+
+    ];
+        console.log(pizzaShopPizzas)
+        // 2. Programmatically add a new pizza object to the array.
+        //    Print the updated array.
+        //    Dummy data in case you need it:
+        //    (Meat Lovers – $12.99 – Not vegetarian)
+
+        pizzaShopPizzas.push[{name:"Meat Lovers",price:12.99,isVegetarian:false}];
+        console.log(pizzaShopPizzas);
+
+        // 3. Use the spread operator (...) to make a copy of the pizza array
+        //    and add a "Calzone" at the end (do not change the original).
+        //    Print both arrays.
+        //    Dummy data in case you need it:
+        //    (Calzone – $7.99 – Not vegetarian)
+        let newPizzaShopArray = pizzaShopPizzas.map(item=>{
+            return {...item}
+        })
+        newPizzaShopArray.push({name:"Calzone",price:7.99,isVegetarian:false});
+
+        console.log(pizzaShopPizzas)
+        console.log(newPizzaShopArray);
+
+        // 4. Use array.map to make a new array of just the pizza names.
+        //    Print the result.
+
+        let pizzaNames = newPizzaShopArray.map(item=>item.name);
+        console.log(pizzaNames);
+
+        // 5. Use array.filter to make a new array of only vegetarian pizzas.
+        //    Print the result.
+        let veggiePizzas = newPizzaShopArray.filter(item=>item.isVegetarian);
+        console.log(veggiePizzas)
+
+        // 6. Use array.reduce to calculate the total cost if you bought one of each pizza.
+        //    Print the result.
+        let totalCost = newPizzaShopArray.reduce((prev,curr)=>prev+curr.price,0)
+        console.log(totalCost)
+
+        // 7. Sort the pizzas by price from cheapest to most expensive.
+        //    Print the result.
+        let sortedArray = newPizzaShopArray.sort((a,b)=>a.price-b.price)
+        console.log(sortedArray)
+
+        // 8. Destructure the first pizza in the array into separate variables
+        //    for its name and price. Print them.
+        let {name,price} = sortedArray[0];
+        console.log(name,price);
+
+        // 9. Create a function called `findPizzaByName` that takes in the pizza array
+        //    and a name, and returns the matching pizza object (or null if not found).
+        //    Test it with at least two names.
+        const findPizzaByName = (pizzaArray,name)=>{
+            let results = pizzaArray.filter(item=>item.name===name);
+            if(results.length>0){
+                return results
+            }else{
+                return null;
+            }
+        }
+        console.log(findPizzaByName(sortedArray,"Cheese Pizza"));
+        console.log(findPizzaByName(sortedArray,"Pineapple Pizza"));
+
+        // 10. Create an array where each element is another array representing
+        //     [pizzaName, price]. Print the array.
+        let finalArray = sortedArray.map(item=>[item.name,item.price])
+        console.log(finalArray);
+
+    </script>
+
+</body>
+
+</html>
