@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm</title>
+</head>
+<body>
+    <script>
+        //Name: Naomi Jones
+        //Description; This program allows users to input books into a personal library and update reading statuses
+        // array to store all books
+        let books = [];
+        //Add books
+        let addBook = prompt("Would you like to add a book? (y/n)")
+            .toLowerCase()
+            .charAt(0);
+        while (addBook === "y") {
+            let title = prompt("Book Title: ");
+            let author = prompt("Author: ");
+            let pages = parseInt(prompt("Number of Pages: "));
+            let genre = prompt("Genre: ")
+
+            let book = {
+                title: title,
+                author: author,
+                pages: pages,
+                genre: genre,
+                status: "Not Started",
+                percentageRead: null
+            };
+            books.push(book);
+            console.log(`Successfully added ${title} to your library!!`);
+            
+            addBook = prompt("Would you like to add another book? (y/n)")
+                .toLowerCase()
+                .charAt(0);
+        }
+        // update reading status
+        for (let book of books) {
+            console.log(`Update reading status for ${book.title}: `);
+            console.log("1.) Not Started");
+            console.log("2.) In Progress");
+            console.log("3.) Completed");
+            // asking user for reading status
+            let statusChoice = prompt("Enter 1, 2, or 3 based on your reading status:");// asking user for reading status
+            if (statusChoice === "1") {
+                book.status = "Not Started";
+                book.percentageRead = 0;
+            } else if (statusChoice === "2") {
+                book.status = "In Progress";
+                let currentPage = parseInt(prompt("Current page Number?: "));
+                let percent = (currentPage / book.pages) * 100;//calculation for percentage read
+                book.percentageRead = Math.round(percent);
+            } else if (statusChoice === "3") {
+                book.status = "Completed";
+                book.percentageRead = 100;
+            }
+            }
+            // organize books by genre 
+            let genreObject = books.reduce((acc, book) => {
+                if (!acc[book.genre]) {
+                    acc[book.genre] = [];
+                }
+                acc[book.genre].push(book);
+                return acc;
+            }, {});
+
+            let genres = Object.keys(genreObject);
+
+            for (let genre of genres) {
+                console.log(`--- ${genre} ---`);
+                for (let book of genreObject[genre]) {
+                    if (book.status === "In Progress") {
+                        console.log (`${book.title} by ${book.author} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
+                    } else {
+                        console.log(`${book.title} by ${book.author} - ${book.pages} pages - ${book.status}`);
+                    }
+                    }
+                }
+        // search for books!!
+        let searchTerm = prompt("Search for books by title or author: ").toLowerCase();
+
+        let results = books.filter(book =>
+        book.title.toLowerCase().includes(searchTerm) ||
+        book.author.toLowerCase().includes(searchTerm)
+            );
+        console.log("Results: ");//show results
+
+        for (let book of results) {
+            if (book.status === "In Progress") {console.log(
+                `${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
+            } else {console.log(`
+                ${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status}`);
+            }
+            
+        }
+
+        //sort books by num of pages
+        let sortedBooks = [...books].sort((a,b) => b.pages - a.pages);
+        console.log("Sort books by page count!: ");
+
+        for (let book of sortedBooks) {
+            if (book.status === "In Progress"){
+                console.log(`${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
+            } else {
+                console.log(`${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status}`);
+            }
+            }
+        
+            
+
+        
+
+    </script>
+</body>
+</html>
