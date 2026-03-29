@@ -1,118 +1,120 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Midterm</title>
 </head>
+
 <body>
     <script>
         //Name: Naomi Jones
         //Description; This program allows users to input books into a personal library and update reading statuses
         // array to store all books
-        let books = [];
+        let books = []; // empty array to store all the books the user adds better than variables cause i need as many books as they want and with variables i would have to create a new one for each book which is not efficient.
         //Add books
-        let addBook = prompt("Would you like to add a book? (y/n)")
-            .toLowerCase()
-            .charAt(0);
-        while (addBook === "y") {
+        let addBook = prompt("Would you like to add a book? (y/n)") //prompt to get input from user y/n
+            .toLowerCase() //makes it lower case duhh!
+            .charAt(0); //only checks the first character so yes or no would still work
+        while (addBook === "y") { //while loop to add books as long as user wants too, couldve used for but this made more sense since we dont know how many books they want to add
             let title = prompt("Book Title: ");
             let author = prompt("Author: ");
             let pages = parseInt(prompt("Number of Pages: "));
             let genre = prompt("Genre: ")
 
-            let book = {
-                title: title,
+            let book = { //object that will store all info about each book because its efficient and organized compared to using seperate arrays or variables for each property. Each book will have these properties and values
+                title: title, //properties, value for all below
                 author: author,
                 pages: pages,
                 genre: genre,
                 status: "Not Started",
                 percentageRead: null
             };
-            books.push(book);
-            console.log(`Successfully added ${title} to your library!!`);
-            
-            addBook = prompt("Would you like to add another book? (y/n)")
+            books.push(book); //.push adds book to array
+            console.log(`Successfully added ${title} to your library!!`); //
+
+            addBook = prompt("Would you like to add another book? (y/n)") //question asked if they want to keep adding books if no then while loop ends
                 .toLowerCase()
                 .charAt(0);
         }
         // update reading status
-        for (let book of books) {
-            console.log(`Update reading status for ${book.title}: `);
+        for (let book of books) { // using for...of loop it loops through each book added. used bc cleaner than for loop and we dont need index and it makes it easy to access each book directly.
+            console.log(`Update reading status for ${book.title}: `); //
             console.log("1.) Not Started");
             console.log("2.) In Progress");
             console.log("3.) Completed");
             // asking user for reading status
-            let statusChoice = prompt("Enter 1, 2, or 3 based on your reading status:");// asking user for reading status
-            if (statusChoice === "1") {
+            let statusChoice = prompt("Enter 1, 2, or 3 based on your reading status:"); // create variable then asking user for reading status
+            if (statusChoice === "1") { //if/else if statement to see which option the user chose
                 book.status = "Not Started";
                 book.percentageRead = 0;
             } else if (statusChoice === "2") {
                 book.status = "In Progress";
-                let currentPage = parseInt(prompt("Current page Number?: "));
-                let percent = (currentPage / book.pages) * 100;//calculation for percentage read
-                book.percentageRead = Math.round(percent);
-            } else if (statusChoice === "3") {
+                let currentPage = parseInt(prompt("Current page Number?: ")); //parseInt because we need to change the string to a int
+                let percent = (currentPage / book.pages) * 100; //calculation for percentage read
+                book.percentageRead = Math.round(percent); //divides current page by total pages and mult by 100 to get percent. Math round bc clean lewk
+            } else if (statusChoice === "3") { //completed
                 book.status = "Completed";
-                book.percentageRead = 100;
+                book.percentageRead = 100; //sets percentage read to 100% if the book is completed
             }
+        }
+        // organize books by genre 
+        let genreObject = books.reduce((acc, book) => { //.reduce to loop through the books array one at a time and bc uses less code and more efficient then for loop. dont wanna have to manually build it using for
+            if (!acc[book.genre]) { //have we seen this genre before? also acc is accumulator which holds the object were building
+                acc[book.genre] = []; //if not create new array for that genre
             }
-            // organize books by genre 
-            let genreObject = books.reduce((acc, book) => {
-                if (!acc[book.genre]) {
-                    acc[book.genre] = [];
-                }
-                acc[book.genre].push(book);
-                return acc;
-            }, {});
+            acc[book.genre].push(book); //this adds(pushes) book to the appropriate genre array in the genreObject
+            return acc; //return gives the updated object back to reduce() so it can keep building it for the next books
+        }, {});
 
-            let genres = Object.keys(genreObject);
+        let genres = Object.keys(genreObject); //Object.keys gets all the keys from the genreObject which are the genres and stores them in an array called genres
 
-            for (let genre of genres) {
-                console.log(`--- ${genre} ---`);
-                for (let book of genreObject[genre]) {
-                    if (book.status === "In Progress") {
-                        console.log (`${book.title} by ${book.author} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
-                    } else {
-                        console.log(`${book.title} by ${book.author} - ${book.pages} pages - ${book.status}`);
-                    }
-                    }
+        for (let genre of genres) { //for...of loop to go through each genre in the genres array
+            console.log(`--- ${genre} ---`); // print header for each genre like --- Fantasy ---
+            for (let book of genreObject[genre]) { //loops through books in each genre and then prints the details about each book
+                if (book.status === "In Progress") { //if book is in prgress it shows percent
+                    console.log(`${book.title} by ${book.author} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
+                } else { //if not it prints complete  without the percentage
+                    console.log(`${book.title} by ${book.author} - ${book.pages} pages - ${book.status}`);
                 }
+            }
+        }
         // search for books!!
-        let searchTerm = prompt("Search for books by title or author: ").toLowerCase();
+        let searchTerm = prompt("Search for books by title or author: ").toLowerCase(); //ask user to search for books by title or author
 
-        let results = books.filter(book =>
-        book.title.toLowerCase().includes(searchTerm) ||
-        book.author.toLowerCase().includes(searchTerm)
-            );
-        console.log("Results: ");//show results
+        let results = books.filter(book => //used filter here to create a new array called results that contains only books searched by user works perfectly bc it only returns what i am searching(filtering) for
+            book.title.toLowerCase().includes(searchTerm) || //checks if search term is in the title or author and adds it to results if it is
+            book.author.toLowerCase().includes(searchTerm) //.toLoweCase so we can search without worry about capitalization
+        );
+        console.log("Results: "); //show results
 
-        for (let book of results) {
-            if (book.status === "In Progress") {console.log(
-                `${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
-            } else {console.log(`
+        for (let book of results) { //this just prints all matching books and percentages if its in progress if not just prints the book and its details. Used ` so i could easily put in variables and format it nicely
+            if (book.status === "In Progress") {
+                console.log(
+                    `${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
+            } else {
+                console.log(`
                 ${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status}`);
             }
-            
+
         }
 
         //sort books by num of pages
-        let sortedBooks = [...books].sort((a,b) => b.pages - a.pages);
-        console.log("Sort books by page count!: ");
+        let sortedBooks = [...books].sort((a, b) => b.pages - a.pages); //sort because i want to organize books based on page count. 
+        console.log("Sort books by page count!: "); //used a spread operator because i dont want to change the original books array and sort creates a new array. 
+        //sort takes a compare function that compares two books a and b and sorts them in descending order 
+        // based on page count by subtracting b.pages from a.pages. 
+        // If the result is positive, a comes before b, if negative, b comes before a, if zero they are equal.
 
-        for (let book of sortedBooks) {
-            if (book.status === "In Progress"){
+        for (let book of sortedBooks) { // this just prints all the books in sorted order and shows percentage if its in progress if not just prints the book and its details. Used ` so i could easily put in variables and format it nicely
+            if (book.status === "In Progress") {
                 console.log(`${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status} (${book.percentageRead}% read)`);
             } else {
                 console.log(`${book.title} by ${book.author} - ${book.genre} - ${book.pages} pages - ${book.status}`);
             }
-            }
-        
-            
-
-        
-
+        }
     </script>
 </body>
+
 </html>
